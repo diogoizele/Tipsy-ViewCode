@@ -10,12 +10,16 @@ import UIKit
 
 final class MainCalculatorView: UIViewController, UITextFieldDelegate {
     
+    private var mainCalculatorViewModel = MainCalculatorViewModel()
+    
     private lazy var headerView = HeaderView()
     
     private lazy var bodyView = BodyView()
 
     init() {
         super.init(nibName: nil, bundle: nil)
+        
+        bodyView.setViewModel(mainCalculatorViewModel)
     }
     
     required init?(coder: NSCoder) {

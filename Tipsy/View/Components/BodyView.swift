@@ -10,6 +10,8 @@ import UIKit
 
 class BodyView: UIView {
     
+    private var viewModel: MainCalculatorViewModel?
+    
     private lazy var selectTipView = SelectTipView()
 
     private lazy var chooseSplitView = ChooseSplitView()
@@ -31,13 +33,19 @@ class BodyView: UIView {
         
         self.backgroundColor = UIColor(named: "BackgroundColor")
         self.translatesAutoresizingMaskIntoConstraints = false
+        self.isUserInteractionEnabled = true
+        
+        selectTipView.setViewModel(getViewModel())
         
         self.addSubview(selectTipView)
+        selectTipView.sizeToFit()
         NSLayoutConstraint.activate([
             selectTipView.topAnchor.constraint(equalTo: self.topAnchor, constant: 36),
             selectTipView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 36),
             selectTipView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -36),
+            selectTipView.heightAnchor.constraint(equalToConstant: 80)
         ])
+
         
         self.addSubview(chooseSplitView)
         NSLayoutConstraint.activate([
@@ -60,5 +68,15 @@ class BodyView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func getViewModel() -> MainCalculatorViewModel {
+        if self.viewModel != nil {
+            return self.viewModel!
+        } else {
+            return MainCalculatorViewModel()
+        }
+    }
     
+    public func setViewModel(_ viewModel: MainCalculatorViewModel) {
+        self.viewModel = viewModel
+    }
 }

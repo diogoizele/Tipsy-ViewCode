@@ -10,6 +10,8 @@ import UIKit
 
 class SelectTipView: UIView {
     
+    private var viewModel: MainCalculatorViewModel?
+    
     private lazy var selectTipLabel: UILabel = {
         let view = UILabel()
         view.textColor = UIColor(named: "TextColor")
@@ -29,29 +31,27 @@ class SelectTipView: UIView {
         return view
     }()
     
-    private lazy var zeroPctButton: UIButton = {
-        let view = UIButton()
+    private lazy var zeroPctButton: ButtonPercentage = {
+        let view = ButtonPercentage()
         view.setTitle("0%", for: .normal)
-        view.titleLabel?.font = UIFont.systemFont(ofSize: 28)
-        view.setTitleColor(UIColor(named: "PrimaryColor"), for: .normal)
+        view.setPercentage(0)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-
-    private lazy var tenPctButton: UIButton = {
-       let view = UIButton()
+    
+    private lazy var tenPctButton: ButtonPercentage = {
+        let view = ButtonPercentage()
         view.setTitle("10%", for: .normal)
-        view.titleLabel?.font = UIFont.systemFont(ofSize: 28)
-        view.setTitleColor(UIColor(named: "PrimaryColor"), for: .normal)
+        view.setPercentage(10)
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.isSelected = true
         return view
     }()
-
-    private lazy var twentyPctButton: UIButton = {
-       let view = UIButton()
+    
+    private lazy var twentyPctButton: ButtonPercentage = {
+        let view = ButtonPercentage()
         view.setTitle("20%", for: .normal)
-        view.titleLabel?.font = UIFont.systemFont(ofSize: 28)
-        view.setTitleColor(UIColor(named: "PrimaryColor"), for: .normal)
+        view.setPercentage(20)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -60,8 +60,10 @@ class SelectTipView: UIView {
         super.init(frame: frame)
         
         self.translatesAutoresizingMaskIntoConstraints = false
-       
-
+        self.isUserInteractionEnabled = true
+        
+        self.sizeToFit()
+        
         self.addSubview(selectTipLabel)
         NSLayoutConstraint.activate([
             selectTipLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
@@ -77,6 +79,7 @@ class SelectTipView: UIView {
         ])
         
         selectTipValuesStackView.addArrangedSubview(zeroPctButton)
+        
         NSLayoutConstraint.activate([
             zeroPctButton.topAnchor.constraint(equalTo: selectTipValuesStackView.topAnchor, constant: 0),
             zeroPctButton.leadingAnchor.constraint(equalTo: selectTipValuesStackView.leadingAnchor, constant: 0)
@@ -92,10 +95,41 @@ class SelectTipView: UIView {
             twentyPctButton.topAnchor.constraint(equalTo: selectTipValuesStackView.topAnchor, constant: 0),
             twentyPctButton.trailingAnchor.constraint(equalTo: selectTipValuesStackView.trailingAnchor, constant: 0)
         ])
-
+        
+        zeroPctButton.isUserInteractionEnabled = true
+        zeroPctButton.addTarget(self, action: #selector(tipChanged(_:)), for: .touchUpInside)
+        tenPctButton.isUserInteractionEnabled = true
+        tenPctButton.addTarget(self, action: #selector(tipChanged(_:)), for: .touchUpInside)
+        twentyPctButton.isUserInteractionEnabled = true
+        twentyPctButton.addTarget(self, action: #selector(tipChanged(_:)), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    private func getViewModel() -> MainCalculatorViewModel {
+        if self.viewModel != nil {
+            return self.viewModel!
+        } else {
+            print("ViewModel nula em SelectTipe. Criando outra instância!")
+            return MainCalculatorViewModel()
+        }
+    }
+    
+    
+    public func setViewModel(_ viewModel: MainCalculatorViewModel) {
+        self.viewModel = viewModel
+    }
+    
+    @objc private func tipChanged(_ sender: ButtonPercentage) {
+        print("Clicou! \(sender.getPercentage())")
+        zeroPctButton.isSelected = false
+        tenPctButton.isSelected = false
+        twentyPctButton.isSelected = false
+        
+        sender.isSelected = true
+        viewModel?.tipChanged(with: sender.getPercentage())
+    }
+
 }

@@ -10,4 +10,11 @@ import Foundation
 
 class MainCalculatorViewModel {
     
+    var selectedTip: Double = 0.1
+    
+    func tipChanged(with percentage: Double) {
+        selectedTip = percentage
+        
+        print("Selected Tip: \(selectedTip * 100)%")
+    }
 }

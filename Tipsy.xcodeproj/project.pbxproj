@@ -11,12 +11,13 @@
 		ADB689552326708D006D4E2B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB689542326708D006D4E2B /* SceneDelegate.swift */; };
 		ADB6895C2326708E006D4E2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADB6895B2326708E006D4E2B /* Assets.xcassets */; };
 		B74698DF2B52130D00233FE0 /* MainCalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74698DE2B52130D00233FE0 /* MainCalculatorView.swift */; };
-		B74698E62B5308D600233FE0 /* MainCalculatorModel {.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74698E52B5308D600233FE0 /* MainCalculatorModel {.swift */; };
+		B74698E62B5308D600233FE0 /* MainCalculatorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74698E52B5308D600233FE0 /* MainCalculatorModel.swift */; };
 		B74698E82B53099600233FE0 /* MainCalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74698E72B53099600233FE0 /* MainCalculatorViewModel.swift */; };
 		B74698EB2B5319F100233FE0 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74698EA2B5319F100233FE0 /* HeaderView.swift */; };
 		B74698ED2B531CD400233FE0 /* SelectTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74698EC2B531CD400233FE0 /* SelectTipView.swift */; };
 		B74698EF2B531F0300233FE0 /* ChooseSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74698EE2B531F0300233FE0 /* ChooseSplitView.swift */; };
 		B74698F12B53226A00233FE0 /* BodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74698F02B53226A00233FE0 /* BodyView.swift */; };
+		B7C4007D2B55FE9800257E95 /* ButtonPercentage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C4007C2B55FE9800257E95 /* ButtonPercentage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,12 +27,13 @@
 		ADB6895B2326708E006D4E2B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ADB689602326708E006D4E2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B74698DE2B52130D00233FE0 /* MainCalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCalculatorView.swift; sourceTree = "<group>"; };
-		B74698E52B5308D600233FE0 /* MainCalculatorModel {.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainCalculatorModel {.swift"; sourceTree = "<group>"; };
+		B74698E52B5308D600233FE0 /* MainCalculatorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCalculatorModel.swift; sourceTree = "<group>"; };
 		B74698E72B53099600233FE0 /* MainCalculatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCalculatorViewModel.swift; sourceTree = "<group>"; };
 		B74698EA2B5319F100233FE0 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		B74698EC2B531CD400233FE0 /* SelectTipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTipView.swift; sourceTree = "<group>"; };
 		B74698EE2B531F0300233FE0 /* ChooseSplitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseSplitView.swift; sourceTree = "<group>"; };
 		B74698F02B53226A00233FE0 /* BodyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyView.swift; sourceTree = "<group>"; };
+		B7C4007C2B55FE9800257E95 /* ButtonPercentage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonPercentage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,7 +80,7 @@
 		B74698E02B53079300233FE0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B74698E52B5308D600233FE0 /* MainCalculatorModel {.swift */,
+				B74698E52B5308D600233FE0 /* MainCalculatorModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -116,6 +118,7 @@
 				B74698EC2B531CD400233FE0 /* SelectTipView.swift */,
 				B74698EE2B531F0300233FE0 /* ChooseSplitView.swift */,
 				B74698F02B53226A00233FE0 /* BodyView.swift */,
+				B7C4007C2B55FE9800257E95 /* ButtonPercentage.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -197,12 +200,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				B74698EF2B531F0300233FE0 /* ChooseSplitView.swift in Sources */,
-				B74698E62B5308D600233FE0 /* MainCalculatorModel {.swift in Sources */,
+				B74698E62B5308D600233FE0 /* MainCalculatorModel.swift in Sources */,
 				B74698F12B53226A00233FE0 /* BodyView.swift in Sources */,
 				B74698EB2B5319F100233FE0 /* HeaderView.swift in Sources */,
 				B74698ED2B531CD400233FE0 /* SelectTipView.swift in Sources */,
 				ADB689532326708D006D4E2B /* AppDelegate.swift in Sources */,
 				ADB689552326708D006D4E2B /* SceneDelegate.swift in Sources */,
+				B7C4007D2B55FE9800257E95 /* ButtonPercentage.swift in Sources */,
 				B74698DF2B52130D00233FE0 /* MainCalculatorView.swift in Sources */,
 				B74698E82B53099600233FE0 /* MainCalculatorViewModel.swift in Sources */,
 			);

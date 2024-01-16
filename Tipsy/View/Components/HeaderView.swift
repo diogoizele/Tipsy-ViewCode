@@ -33,6 +33,7 @@ class HeaderView: UIView {
         view.placeholder = "e.g 123.56"
         view.font = UIFont.systemFont(ofSize: 30.0)
         view.textAlignment = .center
+        view.textColor = UIColor(named: "PrimaryColor")
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -48,7 +49,8 @@ class HeaderView: UIView {
             headerStackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 0),
             headerStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             headerStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),
-            headerStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0)
+            headerStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0),
+            headerStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0)
         ])
         
         headerStackView.addSubview(billTotalLabel)

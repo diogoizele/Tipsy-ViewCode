@@ -5,7 +5,6 @@
 //  Created by Diogo Gabriel Izele on 13/01/24.
 //  Copyright © 2024 The App Brewery. All rights reserved.
 //
-
 import UIKit
 
 class BodyView: UIView {
@@ -36,9 +35,9 @@ class BodyView: UIView {
         self.isUserInteractionEnabled = true
         
         selectTipView.setViewModel(getViewModel())
+        chooseSplitView.setViewModel(getViewModel())
         
         self.addSubview(selectTipView)
-        selectTipView.sizeToFit()
         NSLayoutConstraint.activate([
             selectTipView.topAnchor.constraint(equalTo: self.topAnchor, constant: 36),
             selectTipView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 36),
@@ -49,19 +48,24 @@ class BodyView: UIView {
         
         self.addSubview(chooseSplitView)
         NSLayoutConstraint.activate([
-            chooseSplitView.topAnchor.constraint(equalTo: selectTipView.selectTipValuesStackView.bottomAnchor, constant: 58),
+            chooseSplitView.topAnchor.constraint(equalTo: selectTipView.bottomAnchor, constant: 58),
             chooseSplitView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 36),
             chooseSplitView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -36),
+            chooseSplitView.heightAnchor.constraint(equalToConstant: 100)
         ])
 
         
         self.addSubview(calculatedButton)
-        calculatedButton.sizeToFit()
         NSLayoutConstraint.activate([
             calculatedButton.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -16),
             calculatedButton.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             calculatedButton.heightAnchor.constraint(equalToConstant: 50),
         ])
+        calculatedButton.isUserInteractionEnabled = true
+        calculatedButton.addTarget(self, action: #selector(calculatePressed(_:)), for: .touchUpInside)
+        
+        // Chame isso para garantir que as subviews foram atualizadas
+        self.layoutIfNeeded()
     }
     
     required init?(coder: NSCoder) {
@@ -78,5 +82,10 @@ class BodyView: UIView {
     
     public func setViewModel(_ viewModel: MainCalculatorViewModel) {
         self.viewModel = viewModel
+    }
+    
+    @objc
+    func calculatePressed(_ sender: UIButton) {
+        getViewModel().calculateValue()
     }
 }

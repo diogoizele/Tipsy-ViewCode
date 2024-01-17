@@ -129,7 +129,7 @@ class SelectTipView: UIView {
         twentyPctButton.isSelected = false
         
         sender.isSelected = true
-        viewModel?.tipChanged(with: sender.getPercentage())
+        getViewModel().tipChanged(with: sender.getPercentage())
     }
 
 }

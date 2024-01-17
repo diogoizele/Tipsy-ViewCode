@@ -8,7 +8,9 @@
 
 import UIKit
 
-class HeaderView: UIView {
+class HeaderView: UIView, UITextFieldDelegate {
+    
+    private var mainCalculatorViewModel: MainCalculatorViewModel?
     
     private lazy var headerStackView: UIStackView = {
         let view = UIStackView()
@@ -28,13 +30,14 @@ class HeaderView: UIView {
         return view
     }()
     
-    public lazy var billTextField: UITextField = {
+    private lazy var billTextField: UITextField = {
         let view = UITextField()
         view.placeholder = "e.g 123.56"
         view.font = UIFont.systemFont(ofSize: 30.0)
         view.textAlignment = .center
         view.textColor = UIColor(named: "PrimaryColor")
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.keyboardType = .numberPad
         return view
     }()
     
@@ -66,9 +69,37 @@ class HeaderView: UIView {
             billTextField.leadingAnchor.constraint(equalTo: headerStackView.leadingAnchor, constant: 48),
             billTextField.trailingAnchor.constraint(equalTo: headerStackView.trailingAnchor, constant: -48)
         ])
+        
+        billTextField.isUserInteractionEnabled = true
+        billTextField.delegate = self
+        billTextField.addTarget(self, action: #selector(billValueChanged(_:)), for: .editingChanged)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    private func getViewModel() -> MainCalculatorViewModel {
+        if self.mainCalculatorViewModel != nil {
+            return self.mainCalculatorViewModel!
+        } else {
+            print("ViewModel nula em HeaderView. Criando outra instância!")
+            return MainCalculatorViewModel()
+        }
+    }
+    
+    
+    public func setViewModel(_ viewModel: MainCalculatorViewModel) {
+        self.mainCalculatorViewModel = viewModel
+    }
+    
+    
+    @objc
+    func billValueChanged(_ sender: UITextField) {
+        let text = sender.text ?? ""
+        
+        let amount: Double = Double(text) ?? 0.0
+                  
+        getViewModel().changeAmount(with: amount)
+     }
 }

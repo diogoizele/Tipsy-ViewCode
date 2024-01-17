@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class MainCalculatorView: UIViewController, UITextFieldDelegate {
+final class MainCalculatorView: UIViewController {
     
     private var mainCalculatorViewModel = MainCalculatorViewModel()
     
@@ -20,6 +20,7 @@ final class MainCalculatorView: UIViewController, UITextFieldDelegate {
         super.init(nibName: nil, bundle: nil)
         
         bodyView.setViewModel(mainCalculatorViewModel)
+        headerView.setViewModel(mainCalculatorViewModel)
     }
     
     required init?(coder: NSCoder) {
@@ -28,8 +29,7 @@ final class MainCalculatorView: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        headerView.billTextField.delegate = self
-        headerView.billTextField.isUserInteractionEnabled = true
+
         setConstraints()
     }
     

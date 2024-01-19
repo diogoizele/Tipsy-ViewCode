@@ -10,7 +10,7 @@ import UIKit
 
 class HeaderView: UIView, UITextFieldDelegate {
     
-    private var mainCalculatorViewModel: MainCalculatorViewModel?
+    private var mainCalculatorViewModel: MainCalculatorViewModel
     
     private lazy var headerStackView: UIStackView = {
         let view = UIStackView()
@@ -41,8 +41,12 @@ class HeaderView: UIView, UITextFieldDelegate {
         return view
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    
+    init(viewModel: MainCalculatorViewModel) {
+
+        self.mainCalculatorViewModel = viewModel
+        
+        super.init(frame: .zero)
         
         self.backgroundColor = .white
         self.translatesAutoresizingMaskIntoConstraints = false
@@ -79,20 +83,6 @@ class HeaderView: UIView, UITextFieldDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func getViewModel() -> MainCalculatorViewModel {
-        if self.mainCalculatorViewModel != nil {
-            return self.mainCalculatorViewModel!
-        } else {
-            print("ViewModel nula em HeaderView. Criando outra instância!")
-            return MainCalculatorViewModel()
-        }
-    }
-    
-    
-    public func setViewModel(_ viewModel: MainCalculatorViewModel) {
-        self.mainCalculatorViewModel = viewModel
-    }
-    
     
     @objc
     func billValueChanged(_ sender: UITextField) {
@@ -100,6 +90,6 @@ class HeaderView: UIView, UITextFieldDelegate {
         
         let amount: Double = Double(text) ?? 0.0
                   
-        getViewModel().changeAmount(with: amount)
+        mainCalculatorViewModel.changeAmount(with: amount)
      }
 }

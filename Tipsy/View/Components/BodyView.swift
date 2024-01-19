@@ -9,11 +9,10 @@ import UIKit
 
 class BodyView: UIView {
     
-    private var viewModel: MainCalculatorViewModel?
+    private var mainCalculatorViewModel: MainCalculatorViewModel
     
-    private lazy var selectTipView = SelectTipView()
-
-    private lazy var chooseSplitView = ChooseSplitView()
+    private var selectTipView: SelectTipView
+    private var chooseSplitView: ChooseSplitView
 
     private lazy var calculatedButton: UIButton = {
         let view = UIButton()
@@ -27,15 +26,17 @@ class BodyView: UIView {
     }()
     
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(viewModel: MainCalculatorViewModel) {
+        self.mainCalculatorViewModel = viewModel
+        
+        self.selectTipView = SelectTipView(viewModel: viewModel)
+        self.chooseSplitView = ChooseSplitView(viewModel: viewModel)
+        
+        super.init(frame: .zero)
         
         self.backgroundColor = UIColor(named: "BackgroundColor")
         self.translatesAutoresizingMaskIntoConstraints = false
         self.isUserInteractionEnabled = true
-        
-        selectTipView.setViewModel(getViewModel())
-        chooseSplitView.setViewModel(getViewModel())
         
         self.addSubview(selectTipView)
         NSLayoutConstraint.activate([
@@ -45,7 +46,6 @@ class BodyView: UIView {
             selectTipView.heightAnchor.constraint(equalToConstant: 80)
         ])
 
-        
         self.addSubview(chooseSplitView)
         NSLayoutConstraint.activate([
             chooseSplitView.topAnchor.constraint(equalTo: selectTipView.bottomAnchor, constant: 58),
@@ -64,7 +64,6 @@ class BodyView: UIView {
         calculatedButton.isUserInteractionEnabled = true
         calculatedButton.addTarget(self, action: #selector(calculatePressed(_:)), for: .touchUpInside)
         
-        // Chame isso para garantir que as subviews foram atualizadas
         self.layoutIfNeeded()
     }
     
@@ -72,20 +71,8 @@ class BodyView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func getViewModel() -> MainCalculatorViewModel {
-        if self.viewModel != nil {
-            return self.viewModel!
-        } else {
-            return MainCalculatorViewModel()
-        }
-    }
-    
-    public func setViewModel(_ viewModel: MainCalculatorViewModel) {
-        self.viewModel = viewModel
-    }
-    
     @objc
     func calculatePressed(_ sender: UIButton) {
-        getViewModel().calculateValue()
+        mainCalculatorViewModel.calculateValue()
     }
 }

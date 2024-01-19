@@ -10,7 +10,7 @@ import UIKit
 
 class SelectTipView: UIView {
     
-    private var viewModel: MainCalculatorViewModel?
+    private var mainCalculatorViewModel: MainCalculatorViewModel
     
     private lazy var selectTipLabel: UILabel = {
         let view = UILabel()
@@ -56,8 +56,10 @@ class SelectTipView: UIView {
         return view
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(viewModel: MainCalculatorViewModel) {
+        self.mainCalculatorViewModel = viewModel
+        
+        super.init(frame: .zero)
         
         self.translatesAutoresizingMaskIntoConstraints = false
         self.isUserInteractionEnabled = true
@@ -108,20 +110,7 @@ class SelectTipView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func getViewModel() -> MainCalculatorViewModel {
-        if self.viewModel != nil {
-            return self.viewModel!
-        } else {
-            print("ViewModel nula em SelectTipe. Criando outra instância!")
-            return MainCalculatorViewModel()
-        }
-    }
-    
-    
-    public func setViewModel(_ viewModel: MainCalculatorViewModel) {
-        self.viewModel = viewModel
-    }
-    
+
     @objc private func tipChanged(_ sender: ButtonPercentage) {
         print("Clicou! \(sender.getPercentage())")
         zeroPctButton.isSelected = false
@@ -129,7 +118,7 @@ class SelectTipView: UIView {
         twentyPctButton.isSelected = false
         
         sender.isSelected = true
-        getViewModel().tipChanged(with: sender.getPercentage())
+        mainCalculatorViewModel.tipChanged(with: sender.getPercentage())
     }
 
 }

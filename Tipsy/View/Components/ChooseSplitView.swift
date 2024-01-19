@@ -9,7 +9,7 @@ import UIKit
 
 class ChooseSplitView: UIView {
     
-    private var viewModel: MainCalculatorViewModel?
+    private var mainCalculatorViewModel: MainCalculatorViewModel
 
     private lazy var chooseSplitLabel: UILabel = {
         let view = UILabel()
@@ -42,16 +42,18 @@ class ChooseSplitView: UIView {
         view.minimumValue = 2
         view.maximumValue = 15
         view.stepValue = 1
-        view.value = Double(getViewModel().peopleQuantity)
+        view.value = Double(mainCalculatorViewModel.peopleQuantity)
         return view
     }()
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(viewModel: MainCalculatorViewModel) {
+        self.mainCalculatorViewModel = viewModel
+        
+        super.init(frame: .zero)
 
         self.translatesAutoresizingMaskIntoConstraints = false
 
-        peopleQuantityLabel.text = String(getViewModel().peopleQuantity)
+        peopleQuantityLabel.text = String(mainCalculatorViewModel.peopleQuantity)
 
         self.addSubview(chooseSplitLabel)
         NSLayoutConstraint.activate([
@@ -77,25 +79,11 @@ class ChooseSplitView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    private func getViewModel() -> MainCalculatorViewModel {
-        if self.viewModel != nil {
-            return self.viewModel!
-        } else {
-            print("ViewModel nula em ChooseSplitView. Criando outra instância!")
-            return MainCalculatorViewModel()
-        }
-    }
-    
-    
-    public func setViewModel(_ viewModel: MainCalculatorViewModel) {
-        self.viewModel = viewModel
-    }
     
     @objc
     func stepperValueChanged(_ sender: UIStepper) {
         let value = Int(sender.value)
-        getViewModel().peopleQuantityChanged(with: value)
+        mainCalculatorViewModel.peopleQuantityChanged(with: value)
         peopleQuantityLabel.text = String(value)
     }
 }

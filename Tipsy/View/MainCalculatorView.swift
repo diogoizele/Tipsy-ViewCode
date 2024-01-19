@@ -12,15 +12,14 @@ final class MainCalculatorView: UIViewController {
     
     private var mainCalculatorViewModel = MainCalculatorViewModel()
     
-    private lazy var headerView = HeaderView()
+    private var headerView: HeaderView
+    private var bodyView: BodyView
     
-    private lazy var bodyView = BodyView()
-
     init() {
-        super.init(nibName: nil, bundle: nil)
+        self.headerView = HeaderView(viewModel: mainCalculatorViewModel)
+        self.bodyView = BodyView(viewModel: mainCalculatorViewModel)
         
-        bodyView.setViewModel(mainCalculatorViewModel)
-        headerView.setViewModel(mainCalculatorViewModel)
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {

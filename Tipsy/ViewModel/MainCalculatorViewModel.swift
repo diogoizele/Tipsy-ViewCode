@@ -11,26 +11,19 @@ import Foundation
 class MainCalculatorViewModel {
     
     var moneyAmount: Double = 0.0
-    
     var selectedTip: Double = 0.1
-    
     var peopleQuantity: Int = 2
 
     func tipChanged(with percentage: Double) {
         selectedTip = percentage
-        calculateValue()
     }
     
-    
     func peopleQuantityChanged(with amount: Int) {
-      
         peopleQuantity = amount
-        calculateValue()
     }
     
     func changeAmount(with amount: Double) {
         moneyAmount = amount
-        calculateValue()
     }
     
     func calculateValue() {

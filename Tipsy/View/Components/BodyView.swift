@@ -7,6 +7,20 @@
 //
 import UIKit
 
+extension UIView {
+    func findParentViewController() -> UIViewController? {
+        var responder: UIResponder? = self
+        while let nextResponder = responder?.next {
+            responder = nextResponder
+            if let viewController = responder as? UIViewController {
+                return viewController
+            }
+        }
+        return nil
+    }
+}
+
+
 class BodyView: UIView {
     
     private var mainCalculatorViewModel: MainCalculatorViewModel
@@ -73,6 +87,15 @@ class BodyView: UIView {
     
     @objc
     func calculatePressed(_ sender: UIButton) {
-        mainCalculatorViewModel.calculateValue()
+        let calculatedResult = mainCalculatorViewModel.calculateValue()
+        
+        let resultView = ResultView()
+        resultView.calculatedResult = calculatedResult
+        resultView.peopleSplitted = mainCalculatorViewModel.peopleQuantity
+        resultView.tipPercentage = mainCalculatorViewModel.selectedTip
+        
+        if let parentView = self.findParentViewController() {
+            parentView.present(resultView, animated: true)
+        }
     }
 }

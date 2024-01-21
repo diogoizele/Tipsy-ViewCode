@@ -26,10 +26,15 @@ class MainCalculatorViewModel {
         moneyAmount = amount
     }
     
-    func calculateValue() {
+    func calculateValue() -> Double {
         print("Selected Tip: \(selectedTip * 100)%")
         print("People quantity: \(peopleQuantity)")
         print("moneyAmount: \(moneyAmount)")
+        
+        let increasedPercentage = moneyAmount * (1 + selectedTip)
+        let result = increasedPercentage / Double(peopleQuantity)
+        
+        return result
     }
 
 }

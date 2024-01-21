@@ -10,6 +10,8 @@ This project intentionally diverges from the traditional Storyboard approach to 
 
 ## Overview
 
+![Example GIF](example.gif)
+
 Welcome to Tipsy, a Tip Calculator App. Unlike the conventional Interface Builder with Storyboard method, Tipsy is an exploration into programmatic UI using `ViewCode`. 🚀💡
 
 ## Learning Objectives
